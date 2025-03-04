@@ -11,3 +11,5 @@ bazel-*/
 cmake-build-*/
 
 test/jank/data
+
+cmakeUserPath.json

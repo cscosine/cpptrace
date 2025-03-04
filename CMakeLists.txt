@@ -96,6 +96,9 @@ endif()
 set(target_name "cpptrace-lib")
 add_library(${target_name} ${build_type})
 
+# add d to debug libraries
+set_target_properties(${target_name} PROPERTIES DEBUG_POSTFIX "d")
+
 # Alias to cause error at configuration time instead of link time if target is missing
 add_library(cpptrace::cpptrace ALIAS ${target_name})
 

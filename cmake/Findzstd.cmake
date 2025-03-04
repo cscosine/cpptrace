@@ -8,10 +8,21 @@
 # zstd_INCLUDE_DIR
 # zstd_LIBRARY
 
-find_path(zstd_INCLUDE_DIR NAMES zstd.h)
+## NOTE(sceriani): add hint to find zstd locally, to fix a failure in linux compilation
+## TODO(sceriani): consider to remove this WAR and compile zstd as separate library if more troubles occur
 
-find_library(zstd_LIBRARY_DEBUG NAMES zstdd zstd_staticd)
-find_library(zstd_LIBRARY_RELEASE NAMES zstd zstd_static)
+set(LOCAL_PATH_HINT_INCLUDE ${CMAKE_CURRENT_LIST_DIR}/../../../include/)
+cmake_path(SET NORMALIZED_PATH NORMALIZE "${LOCAL_PATH_HINT_INCLUDE}")
+set(LOCAL_PATH_HINT_INCLUDE ${NORMALIZED_PATH})
+
+set(LOCAL_PATH_HINT_LIBRARY ${CMAKE_CURRENT_LIST_DIR}/../../)
+cmake_path(SET NORMALIZED_PATH NORMALIZE "${LOCAL_PATH_HINT_LIBRARY}")
+set(LOCAL_PATH_HINT_LIBRARY ${NORMALIZED_PATH})
+
+find_path(zstd_INCLUDE_DIR NAMES zstd.h  HINTS ${LOCAL_PATH_HINT_INCLUDE})
+
+find_library(zstd_LIBRARY_DEBUG NAMES zstdd zstd_staticd HINTS ${LOCAL_PATH_HINT_LIBRARY})
+find_library(zstd_LIBRARY_RELEASE NAMES zstd zstd_static HINTS ${LOCAL_PATH_HINT_LIBRARY})
 
 include(SelectLibraryConfigurations)
 SELECT_LIBRARY_CONFIGURATIONS(zstd)

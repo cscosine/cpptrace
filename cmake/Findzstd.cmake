@@ -8,8 +8,8 @@
 # zstd_INCLUDE_DIR
 # zstd_LIBRARY
 
-## NOTE(sceriani): add hint to find zstd locally, to fix a failure in linux compilation
-## TODO(sceriani): consider to remove this WAR and compile zstd as separate library if more troubles occur
+## NOTE(sc): add hint to find zstd locally, to fix a failure in linux compilation
+## TODO(sc): consider to remove this WAR and compile zstd as separate library if more troubles occur
 
 set(LOCAL_PATH_HINT_INCLUDE ${CMAKE_CURRENT_LIST_DIR}/../../../include/)
 cmake_path(SET NORMALIZED_PATH NORMALIZE "${LOCAL_PATH_HINT_INCLUDE}")
